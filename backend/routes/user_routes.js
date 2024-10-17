@@ -1,0 +1,58 @@
+const express = require('express');
+const {check} = require('express-validator');
+
+const usersController = require('../controllers/userController');
+
+const router = express.Router();
+router.get('/details/:uid',usersController.getOneUser);
+router.get('/',usersController.getUsers);
+
+
+router.post('/signup',
+    [
+        check('username')
+        .not()
+        .isEmpty(),
+        check('email')
+        .normalizeEmail() // Test@test.com => test@test.com
+        .isEmail(),
+        check('password').isLength({ min: 6 })
+    ],
+    usersController.signup
+);
+
+router.post('/login',usersController.login);
+
+router.patch(
+    '/:uid/username',
+    [
+        check('newUsername').not().isEmpty()
+    ],
+    usersController.changeUsername
+);
+
+router.patch(
+    '/:uid/password',
+    [
+      check('currentPassword').isLength({ min: 6 }),
+      check('newPassword').isLength({ min: 6 })
+    ],
+    usersController.changePassword
+);
+
+router.get('/search', usersController.searchUsers);
+
+router.get('/chatlist/:userId', usersController.getChatList);
+
+router.patch('/profile/:userId',
+    [
+        check('username')
+        .not()
+        .isEmpty()
+    ],
+    usersController.updateUserProfile);
+
+
+module.exports = router;
+
+
