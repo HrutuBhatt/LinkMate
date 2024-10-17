@@ -1,0 +1,96 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Chat List Container */
+.chat-list {
+  width: 300px; /* Fixed width for the chat list panel */
+  background-color: #fff; /* White background for clarity */
+  border-right: 1px solid #ddd; /* Subtle border to separate chat list from chat area */
+  height: 100vh; /* Full viewport height */
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  overflow-y: auto; /* Scroll if there are too many chats */
+}
+
+/* Chat Search Bar */
+.chat-search input {
+  width: 100%;
+  padding: 10px;
+  border-radius: 20px;
+  border: 1px solid #ccc; /* Subtle border around search bar */
+  margin-bottom: 15px;
+  font-size: 16px;
+  outline: none;
+  background-color: #f9f9f9;
+  transition: border-color 0.3s ease;
+}
+
+.chat-search input:focus {
+  border-color: #007bff; /* Highlight border on focus */
+}
+
+/* Chat List Items */
+.chat-list-items {
+  list-style: none; /* Remove bullet points from list */
+  padding: 0;
+  margin: 0;
+}
+
+/* Chat Item */
+.chat-item {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.chat-item:hover {
+  background-color: #f0f0f0; /* Light gray background on hover */
+}
+
+/* Profile Picture in Chat Item */
+.profile-pic {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+/* Chat Info (Username) */
+.chat-info h4 {
+  font-size: 18px;
+  font-weight: 500;
+  margin: 0;
+  color: #333;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .chat-list {
+    width: 100%; /* Full width on smaller screens */
+    border-right: none;
+  }
+}
+
+.green-dot {
+  width: 10px;
+  height: 10px;
+  background-color: rgb(11, 255, 11);
+  border-radius: 50%;
+  display: inline-block;
+  margin-left: 8px;
+}
+
+.online-indicator {
+  display: inline-block;
+  width: 8px; /* Size of the dot */
+  height: 8px;
+  background-color: rgb(9, 255, 9); /* Green color for online */
+  border-radius: 50%; /* Make it a circle */
+  margin-left: 8px; /* Space between username and dot */
+}

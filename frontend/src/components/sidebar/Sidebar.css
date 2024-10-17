@@ -1,0 +1,134 @@
+/* Basic Sidebar Structure */
+.sidebar {
+    /* width: 100px; Default width */
+    width:20vh;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 50px 0;
+    margin-left:2px;
+    transition: width 0.3s ease; /* Smooth transition */
+    border-right: 1px solid #ccc;
+    position: relative;
+    z-index:10;
+  }
+  
+  .sidebar.expanded {
+    width: 30vh; /* Expanded width */
+  }
+  
+  .menu-button {
+    margin-bottom: 30px;
+    cursor: pointer;
+  }
+  
+  .sidebar-icons {
+    flex-grow: 1;
+  }
+  
+  .sidebar-item {
+    display: flex;/* Basic Sidebar Structure */
+    .sidebar {
+      width: 60px; /* Default width */
+      background-color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 15px 0;
+      transition: width 0.3s ease; /* Smooth transition */
+      border-right: 1px solid #ccc;
+      position: relative;
+    }
+    
+    .sidebar.expanded {
+      width: 200px; /* Expanded width */
+    }
+    
+    .menu-button {
+      margin-bottom: 30px;
+      cursor: pointer;
+    }
+    
+    .sidebar-icons {
+      flex-grow: 1;
+    }
+    
+    .sidebar-item {
+      display: flex;
+      align-items: center;
+      margin: 20px 0;
+      color: #000;
+      text-decoration: none;
+    }
+    
+    .icon {
+      font-size: 24px;
+    }
+    
+    .icon-name {
+      margin-left: 15px;
+      font-size: 1.1em;
+    }
+    
+    .profile-button {
+      display: flex;
+      align-items: center;
+      margin-top: auto;
+      color: #000;
+      text-decoration: none;
+      margin-bottom: 15px;
+    }
+    
+    .profile-button .icon {
+      font-size: 24px;
+    }
+    /* Media Queries for Responsive Design */
+    @media (max-width: 768px) {
+      .sidebar {
+        width: 200px; /* Smaller width for smaller screens */
+      }
+    
+      .sidebar.expanded {
+        width: 300px; /* Adjust expanded width for smaller screens if necessary */
+      }
+    }
+    
+    align-items: center;
+    margin: 30px 0;
+    color: #000;
+    text-decoration: none;
+  }
+  
+  .icon {
+    font-size: 24px;
+  }
+  
+  .icon-name {
+    margin-left: 25px;
+    font-size: 1.1em;
+  }
+  
+  .profile-button {
+    display: flex;
+    align-items: center;
+    margin-top: auto;
+    color: #000;
+    text-decoration: none;
+    margin-bottom: 15px;
+  }
+  
+  .profile-button .icon {
+    font-size: 24px;
+  }
+  /* Media Queries for Responsive Design */
+  @media (max-width: 100px) {
+    .sidebar {
+      width: 200px; /* Smaller width for smaller screens */
+    }
+  
+    .sidebar.expanded {
+      width: 300px; /* Adjust expanded width for smaller screens if necessary */
+    }
+  }
+  

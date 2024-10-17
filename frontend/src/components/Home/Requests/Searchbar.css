@@ -1,0 +1,89 @@
+/* Styles for the SearchUser component */
+.search-user-container {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: #f9f9f9;
+  }
+  
+  .search-form {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .search-input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    font-size: 16px;
+    width: 1000px;
+  }
+  
+  .search-button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    background-color: #b597ff;
+    color: #302f2f;
+    font-size: 16px;
+    cursor: pointer;
+    /* width: 10px; */
+  }
+  
+  .search-button:hover {
+    background-color: #773dce;
+    color: white;
+  }
+  
+  .user-item {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #fff;
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .user-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  }
+  
+  .user-item img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 15px;
+    object-fit: cover;
+  }
+  
+  .user-item .user-info {
+    flex: 1;
+  }
+  
+  .user-item .username {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .user-item .user-details {
+    font-size: 14px;
+    color: #666;
+  }
+  .user-item:hover {
+    background-color: #f0f0f0;
+  }
+  
+  .user-profile-container {
+    margin-top: 20px;
+  }
+  

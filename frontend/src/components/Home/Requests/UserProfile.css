@@ -1,0 +1,89 @@
+/* Styles for the UserProfile component */
+.user-profile-container {
+    width: 80%;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+  }
+  
+  .user-profile-container h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  
+  .user-profile-container p {
+    font-size: 16px;
+    color: #555;
+  }
+  
+  .user-profile-container button {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-right: 10px;
+  }
+  
+  .user-profile-container button:hover {
+    opacity: 0.9;
+  }
+  
+  .user-profile-container .remove-friend {
+    background-color: #dc3545; /* Red */
+  }
+  
+  .user-profile-container .remove-friend:hover {
+    background-color: #c82333;
+  }
+  
+  .user-profile-container .send-request {
+    background-color: #007bff; /* Blue */
+  }
+  
+  .user-profile-container .send-request:hover {
+    background-color: #0056b3;
+  }
+  
+  .user-profile-container .cancel-request {
+    background-color: #6c757d; /* Gray */
+  }
+  
+  .user-profile-container .cancel-request:hover {
+    background-color: #5a6268;
+  }
+  
+  .user-profile-container .request-status {
+    margin-top: 20px;
+  }
+  
+  .user-profile-container .request-item {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 10px;
+  }
+  
+  .user-profile-container .request-item a {
+    color: #007bff;
+    text-decoration: none;
+    margin-right: 15px;
+  }
+  
+  .user-profile-container .request-item a:hover {
+    text-decoration: underline;
+  }
+  
+  .user-profile-container .request-item button {
+    margin-left: 10px;
+  }
+  
+  .request-item button{
+    background-color: rgb(210, 182, 249);
+  }

@@ -1,0 +1,88 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  /* Group List Container */
+  .group-list {
+    width: 300px; /* Fixed width for the group list panel */
+    background-color: #fff; /* White background for clarity */
+    border-right: 1px solid #ddd; /* Subtle border to separate group list from chat area */
+    height: 100vh; /* Full viewport height */
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    overflow-y: auto; /* Scroll if there are too many groups */
+  }
+  
+  /* Group Search Bar */
+  .group-search input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 20px;
+    border: 1px solid #ccc; /* Subtle border around search bar */
+    margin-bottom: 15px;
+    font-size: 16px;
+    outline: none;
+    background-color: #f9f9f9;
+    transition: border-color 0.3s ease;
+  }
+  
+  .group-search input:focus {
+    border-color: #007bff; /* Highlight border on focus */
+  }
+  
+  /* Group List Items */
+  .group-list-items {
+    list-style: none; /* Remove bullet points from list */
+    padding: 0;
+    margin: 0;
+  }
+  
+  /* Group Item */
+  .group-item {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+  
+  .group-item:hover {
+    background-color: #f0f0f0; /* Light gray background on hover */
+  }
+  
+  /* Profile Picture in Group Item */
+  .group-profile-pic {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 10px;
+  }
+  
+  /* Group Info (Group Name) */
+  .group-info h4 {
+    font-size: 18px;
+    font-weight: 500;
+    margin: 0;
+    color: #333;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .group-list {
+      width: 100%; /* Full width on smaller screens */
+      border-right: none;
+    }
+    
+    .group-profile-pic {
+      width: 40px;
+      height: 40px;
+    }
+    
+    .group-info h4 {
+      font-size: 16px;
+    }
+  }
+  

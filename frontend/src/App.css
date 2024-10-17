@@ -1,0 +1,43 @@
+/* General Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* App Container */
+.app-container {
+  display: flex;
+  height: 100vh; /* Full viewport height */
+  background-color: #f9f9f9;
+  overflow: hidden;
+}
+
+/* Main Content Styling */
+main {
+  flex-grow: 1;
+  padding: 20px;
+  transition: margin-left 0.3s ease; /* Smooth transition for sidebar toggle */
+  background-color: #fff; /* Clean white background */
+  overflow-y: auto;
+}
+
+/* When Sidebar is expanded, push main content */
+.main-collapsed {
+  margin-left: 60px; /* Adjust based on collapsed sidebar width */
+}
+
+.main-expanded {
+  margin-left: 250px; /* Adjust based on expanded sidebar width */
+}
+
+/* Responsive layout for smaller screens */
+@media (max-width: 768px) {
+  .app-container {
+    flex-direction: column;
+  }
+
+  main {
+    margin-left: 0;
+  }
+}

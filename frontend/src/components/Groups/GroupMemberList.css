@@ -1,0 +1,218 @@
+/* Group Chat Area */
+.group-chat-area {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+/* Group Header */
+.group-chat-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #e0e0e0;
+}
+
+.group-chat-header h2 {
+  font-size: 24px;
+  font-weight: 600;
+  color: #333;
+}
+
+/* Group Members List */
+.group-members-list {
+  margin-top: 20px;
+}
+
+.group-members-list h3 {
+  font-size: 18px;
+  font-weight: 500;
+  margin-bottom: 10px;
+  color: #444;
+}
+
+.group-members-list ul {
+  list-style: none;
+  padding: 0;
+}
+
+.group-member-tile {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  margin-bottom: 5px;
+  background-color: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.group-member-tile:hover {
+  background-color: #f1f1f1;
+}
+
+.group-member-tile.admin {
+  font-weight: 700;
+  color: #d9534f; /* Highlight for admin */
+}
+
+.add-member-btn {
+  display: block;
+  margin-top: 10px;
+  padding: 10px 15px;
+  background-color: #5cb85c;
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.add-member-btn:hover {
+  background-color: #4cae4c;
+}
+
+/* Context Menu */
+.context-menu {
+  position: absolute;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  z-index: 100;
+}
+
+.context-menu-option {
+  padding: 8px 12px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.context-menu-option:hover {
+  background-color: #f1f1f1;
+}
+
+/* Backdrop to close the context menu */
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 999;
+  background: transparent;
+}
+
+/* Modal for adding members */
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgb(254, 254, 254);
+  color:#333;
+  padding: 20px;
+  width: 400px;
+  border-radius: 8px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+}
+
+.usermodal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 20px;
+  z-index: 1000;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.usermodal h3 {
+  margin-bottom: 20px;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.usermodal ul {
+  list-style-type: none;
+  padding: 0;
+  max-height: 200px;
+  overflow-y: auto;
+  border-top: 1px solid #e0e0e0;
+}
+
+.usermodal ul li {
+  padding: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.usermodal ul li:hover {
+  background-color: #f1f1f1;
+}
+
+.usermodal button {
+  margin-top: 15px;
+  padding: 10px 15px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.usermodal button:hover {
+  background-color: #0056b3;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .group-chat-area {
+    padding: 10px;
+  }
+
+  .usermodal {
+    width: 90%;
+  }
+}
+
+.exit-group-btn {
+  display: flex;
+  justify-content: center; /* Center the button horizontally */
+  margin-top: 20px;
+}
+
+.exit-group-btn button {
+  background-color: #ff4d4f; /* Red color to indicate danger (leaving the group) */
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.exit-group-btn button:hover {
+  background-color: #d9363e; /* Darker red on hover */
+}
+
+.exit-group-btn button:focus {
+  outline: none; /* Remove default focus outline */
+}
+
+.exit-group-btn button:active {
+  background-color: #b72a2c; /* Even darker red on click */
+}
+
