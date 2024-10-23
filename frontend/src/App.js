@@ -70,6 +70,8 @@ const App = () => {
       <Routes>
         <Route path="/login" element={!isLoggedIn ? <LoginPage /> : <Navigate to="/" />} />
         <Route path="/signup" element={!isLoggedIn ? <SignupPage /> : <Navigate to="/" />} />
+        <Route path="/" element={<Navigate to="/login" />} />
+
       </Routes>
   
     );
@@ -77,9 +79,9 @@ const App = () => {
   return (
     <Router>
       <div className="app-container" >
-      {{isLoggedIn} && <Sidebar isExpanded={isExpanded} handleMenuClick={handleMenuClick} setIsExpanded={setIsExpanded}/>}
+      {isLoggedIn && <Sidebar isExpanded={isExpanded} handleMenuClick={handleMenuClick} setIsExpanded={setIsExpanded}/>}
 
-      <main >{routes}</main>
+      <main>{routes}</main>
       </div>  
     </Router>
   );

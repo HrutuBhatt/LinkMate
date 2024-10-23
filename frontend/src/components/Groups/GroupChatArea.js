@@ -24,7 +24,6 @@ const GroupChatArea = ({ group, userId, socket }) => {
 
     fetchGroupMessages();
 
-    // Listen for incoming group messages via socket
     if (socket) {
       socket.on('receiveGroupMessage', (message) => {
         if (message.group._id === group._id) {
@@ -48,10 +47,8 @@ const GroupChatArea = ({ group, userId, socket }) => {
         timestamp: new Date()
       };
 
-      // Emit the message to the server via socket
       socket.emit('sendGroupMessage', messageData);
 
-      // Optimistic update (locally add the message before the backend response)
       setMessages((prevMessages) => [...prevMessages, {
         ...messageData,
         sender: { _id: userId, username: 'You' },
@@ -60,6 +57,7 @@ const GroupChatArea = ({ group, userId, socket }) => {
 
       try {
         await axios.post(`/api/messages/send`, messageData);
+        
       } catch (error) {
         console.error('Error sending group message:', error);
       }

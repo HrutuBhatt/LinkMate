@@ -14,6 +14,7 @@
     flex-direction: column;
     padding: 10px;
     overflow-y: auto; /* Scroll if there are too many groups */
+    margin-top: 0%;
   }
   
   /* Group Search Bar */
@@ -86,3 +87,6 @@
     }
   }
   
+  .group-list-container h2{
+    background-color: #f9f0ff;
+  }

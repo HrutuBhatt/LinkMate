@@ -35,5 +35,9 @@ router.get('/:c_userId/:userId', messagesController.getMessages);
 // Route to delete a specific message
 router.delete('/delete/:messageId', messagesController.deleteMessage);
 
-router.put('/markAsSeen', messagesController.markAsSeen);
+router.post('/read', messagesController.readMessages);
 module.exports = router;
+
+router.get('/unread/:userId', messagesController.unReadMessages);
+
+  

@@ -69,11 +69,11 @@ const signup = async(req,res,next)=>{
             'supersecret_dont_share',
             { expiresIn: '1h' }
         );
-        res.status(201).json({ userId: createUser.id, email: createUser.email, token:token});
+        return res.status(201).json({ userId: createUser.id, email: createUser.email, token:token});
 
     } catch(err){
         console.error(err);  
-        res.status(500).json({ message: 'Signing up failed, please try again later.' });
+        return res.status(500).json({ message: 'Signing up failed, please try again later.' });
     }
 };
 

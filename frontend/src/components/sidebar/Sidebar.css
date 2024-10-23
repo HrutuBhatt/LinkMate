@@ -29,6 +29,7 @@
   
   .sidebar-item {
     display: flex;/* Basic Sidebar Structure */
+    cursor: pointer;
     .sidebar {
       width: 60px; /* Default width */
       background-color: #fff;
@@ -60,6 +61,7 @@
       margin: 20px 0;
       color: #000;
       text-decoration: none;
+      cursor: pointer;
     }
     
     .icon {

@@ -34,7 +34,7 @@ const GroupMemberList = () => {
     };
 
     fetchGroupDetails();
-  }, [groupId]);
+  },[groupId, showAddMemberModal]);
 
   //handle exit group
   const handleExitGroup = async()=>{
@@ -126,19 +126,19 @@ const GroupMemberList = () => {
         <ul>
           {/* Admin first */}
           <li className="group-member-tile admin">
-            <span>{group.admin.username} (Admin)</span>
+            <span>{group.admin?.username} (Admin)</span>
           </li>
 
           {/* Other members */}
           {group.members
-          .filter(member => member._id !== group.admin._id)  // Filter out the admin
+          .filter(member => member?._id !== group.admin?._id)  // Filter out the admin
           .map((member) => (
             <li
-              key={member._id}
+              key={member?._id}
               className="group-member-tile"
               onContextMenu={(e) => handleRightClick(e, member)}
             >
-              <span>{member.username}</span>
+              <span>{member?.username}</span>
             </li>
           ))}
         </ul>
@@ -159,7 +159,7 @@ const GroupMemberList = () => {
         >
           {/* Debugging to ensure that rightClickMember is set */}
           {console.log('Context menu open for member:', rightClickMember)}
-          {console.log(isAdmin)}
+          {console.log(isAdmin, rightClickMember)}
           {isAdmin && rightClickMember && ( // Ensure rightClickMember is defined before calling handleRemoveMember
             <div className="context-menu-option" onClick={() => {
               console.log('Clicked Remove for member:', rightClickMember._id); // Debugging

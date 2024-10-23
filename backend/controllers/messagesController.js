@@ -1,5 +1,6 @@
 const HttpError = require('./http-error');
 const Message = require('../models/messages'); // Assuming you have a Message model
+
 const Group = require('../models/groups'); // Assuming you have a Group model for group messages
 const User = require('../models/users');
 const { validationResult } = require('express-validator');
@@ -26,6 +27,28 @@ const sendMessage = async (req, res, next) => {
 
     const { senderId, receiverId, groupId, content, type } = req.body;
 
+    try {
+        if (receiverId) {
+          const user = await User.findOne({ _id: receiverId, "unreadMessages.senderId": senderId });
+      
+          if (user) {
+            // If the sender is already in the unreadMessages array, increment the count
+            await User.updateOne(
+              { _id: receiverId, "unreadMessages.senderId": senderId },
+              { $inc: { "unreadMessages.$.count": 1 } }
+            );
+          } else {
+            // If the sender is not in the unreadMessages array, add them with count 1
+            await User.updateOne(
+              { _id: receiverId },
+              { $push: { unreadMessages: { senderId, count: 1 } } }
+            );
+          }
+        }
+      } catch (err) {
+        console.log("Error in notification sending", err);
+      }
+      
     // const mediaUrl = req.file ? `/uploads/${req.file.filename}` : null;
     if (!receiverId && !groupId ) {
         return res.status(422).json({ message: 'Either receiverId or groupId must be provided.' });
@@ -54,13 +77,7 @@ const sendMessage = async (req, res, next) => {
                 return res.status(422).json({ message: 'No such receiver ID' });
             }
         }
-        // const sender = User.findById(senderId);
-        // if(receiverId){
-        //     const receiver = User.findById(receiverId);
-        //     if(!sender || !receiver){
-        //         return res.status(422).json({ message: 'No such sender or receiver id' });
-        //     }
-        // }
+        
     }
     catch(err){
         console.error(err);
@@ -80,7 +97,7 @@ const sendMessage = async (req, res, next) => {
             type,
             // media: mediaUrl,
             createdAt: new Date(),
-            unread:true
+            isRead:false
         });
 
         await newMessage.save();
@@ -149,6 +166,7 @@ const sendMessage = async (req, res, next) => {
         const error = new HttpError('Sending message failed, Unknown error occured.', 500);
         return next(error);
     }
+    //for notifications
 };
 
 // Function to get messages between two users or within a group
@@ -192,37 +210,6 @@ const getGroupMessages = async(req,res,next)=>{
         return next(error);
     }
 };
-// const getMessages = async (req, res, next) => {
-//     const chatId = req.params.chatId;
-
-//     try {
-//         let messages;
-
-//         if (await Group.findById(chatId)) {
-//             // Fetch messages for a group
-//             messages = await Message.find({ group: chatId })
-//                 .populate('sender', 'username')
-//                 .sort({ createdAt: 1 });
-//         } else {
-//             // Fetch messages between two users
-//             messages = await Message.find({
-//                 $or: [
-//                     { sender: chatId, receiver: req.user._id },
-//                     { sender: req.user._id, receiver: chatId },
-//                 ],
-//             })
-//             .populate('sender receiver', 'username')
-//             .sort({ createdAt: 1 });
-//         }
-
-//         res.json({ messages: messages.map(m => m.toObject({ getters: true })) });
-//     } 
-//     catch (err) {
-//         console.error(err);
-//         const error = new HttpError('Fetching messages failed, please try again later.', 500);
-//         return next(error);
-//     }
-// };
 
 // Function to delete a specific message
 
@@ -238,14 +225,6 @@ const deleteMessage = async (req, res, next) => {
             return next(error);
         }
 
-        // You could also check if the sender is the one deleting the message (optional)
-        // if (message.sender.toString() !== req.user._id.toString()) {
-        //     const error = new HttpError('You are not allowed to delete this message.', 403);
-        //     return next(error);
-        // }
-
-        // await message.remove();
-
         res.status(200).json({ message: 'Message deleted successfully.' });
     } 
     catch (err) {
@@ -255,22 +234,42 @@ const deleteMessage = async (req, res, next) => {
     }
 };
 
-const markAsSeen = async(req,res) =>{
-    const { userId, friendId } = req.body;
+const readMessages = async (req, res) => {
+    const { userId, senderId } = req.body;  // User who is reading the messages from a specific sender
+  
+    // Mark messages from this sender as read
+    await Message.updateMany(
+      { receiver: userId, sender: senderId, isRead: false }, 
+      { isRead: true }
+    );
+  
+    // Reset unread message count for this specific sender
+    await User.updateOne(
+      { _id: userId },
+      { $pull: { unreadMessages: { senderId } } }  // Remove entry for the sender
+    );
+  
+    res.status(200).json({ message: 'Messages marked as read' });
+  };
+  
+  
+  const unReadMessages = async (req, res) => {
     try {
-        await Message.updateMany(
-            { senderId: friendId, receiverId: userId, unread: true },
-            { $set: { unread: false } }
-        );
-        res.status(200).send('Messages marked as seen');
+      const userId = mongoose.Types.ObjectId(userId); // Convert userId to ObjectId
+      const unreadMessages = await Message.find({ receiverId: userId, isRead: false });
+      res.json({ unreadMessages });
     } catch (error) {
-        res.status(500).send('Error marking messages as seen');
+      console.error('Fetching messages failed:', error);
+      res.status(500).send('Fetching messages failed, please try again later.');
     }
-}
+  };
+
 module.exports = {
     sendMessage,
     getMessages,
     deleteMessage,
-    markAsSeen,
-    getGroupMessages
+    // markAsSeen,
+    getGroupMessages,
+    readMessages,
+    unReadMessages
 };

@@ -21,7 +21,8 @@ const ChatList = ({ setSelectedChat, userId, socket }) => {
         } else {
           setIsChatListEmpty(false); // Reset when chatList is populated
         }
-
+        const unreadResponse = await axios.get(`/api/messages/unread/${userId}`);
+        setUnreadChats(unreadResponse.data.unreadChats || []);
         setChatListData(chats);
       } catch (error) {
         console.error('Error fetching chat list data:', error);
@@ -102,26 +103,28 @@ const ChatList = ({ setSelectedChat, userId, socket }) => {
 
       {/* List of Chats or Search Results */}
       <ul className="chat-list-items">
-        {chatListData.map((chat) => (
-          // const isUnread = chat.unread;
-          <li
-            key={chat.friendId ? chat.friendId._id : chat._id} // Use friendId if available, otherwise use userId
-            className="chat-item"
-            onClick={() => setSelectedChat(chat)}
-          >
-            <img
-              src="https://static.vecteezy.com/system/resources/previews/026/619/142/original/default-avatar-profile-icon-of-social-media-user-photo-image-vector.jpg"
-              alt={chat.friendId ? chat.friendId.username : chat.username}
-              className="profile-pic"
-            />
-            <div className="chat-info">
-              <h4>{chat.friendId ? chat.friendId.username : chat.username}</h4>
-              {/* {onlineStatus.get(chat.friendId ? chat.friendId._id : chat._id) === 'online' && (
-                <span className="online-indicator"></span>
-              )} */}
-            </div>
-          </li>
-        ))}
+        {chatListData.map((chat) => {
+          const chatId = chat.friendId ? chat.friendId._id : chat._id;
+          const isUnread = unreadChats.includes(chatId); // Check if this chat has unread messages
+          return (
+            <li
+              key={chatId} // Use friendId if available, otherwise use userId
+              className="chat-item"
+              onClick={() => setSelectedChat(chat)}
+            >
+              <img
+                src="https://static.vecteezy.com/system/resources/previews/026/619/142/original/default-avatar-profile-icon-of-social-media-user-photo-image-vector.jpg"
+                alt={chat.friendId ? chat.friendId.username : chat.username}
+                className="profile-pic"
+              />
+              <div className="chat-info">
+                <h4>{chat.friendId ? chat.friendId.username : chat.username}</h4>
+                {/* Green dot for unread messages */}
+                {isUnread && <span className="green-dot"></span>}
+              </div>
+            </li>
+          );
+        })}
       </ul>
 
       {/* No Results Message */}

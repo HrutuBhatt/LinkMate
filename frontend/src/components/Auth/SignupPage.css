@@ -1,10 +1,11 @@
 /* Common styling for login and signup */
 .auth-container {
   width: 300px;
-  margin: 100px auto;
+  margin: 40px auto;
   padding: 20px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   text-align: center;
+  background-color: #fbf6ff;
 }
 
 .auth-container h2 {
@@ -22,7 +23,7 @@
 .auth-container button {
   width: 100%;
   padding: 10px;
-  background-color: #25d366;
+  background-color: #914dff;
   color: white;
   border: none;
   border-radius: 5px;
@@ -30,7 +31,7 @@
 }
 
 .auth-container button:hover {
-  background-color: #20b759;
+  background-color: #5330c5;
 }
 
 .auth-container p {
@@ -38,10 +39,19 @@
 }
 
 .auth-container a {
-  color: #25d366;
+  color: #9c25d3;
   text-decoration: none;
 }
 
 .auth-container a:hover {
   text-decoration: underline;
 }
+
+.header h1{
+  font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  color: #552a9b;
+  text-align: center;
+  font-weight: 700;
+
+}
+

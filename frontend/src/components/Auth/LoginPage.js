@@ -47,6 +47,10 @@ const LoginPage = () => {
   };
 
   return (
+    <div className='background'>
+    <div className="header">
+      <h1>💬LinkMate</h1>
+    </div>
     <div className="auth-container">
       <h2><u>Login</u></h2>
       <form onSubmit={loginSubmitHandler}>
@@ -73,6 +77,7 @@ const LoginPage = () => {
         </Link>
         
       </form>
+   </div>
    </div>
   );
 };

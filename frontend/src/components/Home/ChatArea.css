@@ -11,7 +11,7 @@
   flex-direction: column;
   flex-grow: 1;
   background-color: #f9f9f9;
-  height: 100vh; /* Full height */
+  height: 97vh; /* Full height */
   padding: 20px;
 }
 
@@ -128,7 +128,7 @@
 .thin-line {
   border: none; /* Remove default border */
   height: 1px; /* Set the height of the line */
-  background-color: #ddd; /* Light gray color for a subtle line */
+  background-color: #bbbbbb; /* Light gray color for a subtle line */
   margin: 5px 0; /* Space above and below the line */
 }
 
@@ -209,8 +209,8 @@ div.timestamp{
   color: #666; /* Color of the bio text */
 }
 
-
-.attach{
-  height:30px;
-  width: 25px;
+.blue-tick {
+  color: blue;
+  font-size: 12px;
+  margin-left: 5px;
 }

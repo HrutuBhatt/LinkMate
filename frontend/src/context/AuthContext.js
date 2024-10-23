@@ -25,6 +25,7 @@ export const AuthProvider = (props) => {
   const logout = useCallback(() => {
     setToken(null);
     setUserId(null);
+    // isLoggedIn = false;
     localStorage.removeItem('userToken');
     localStorage.removeItem('userId');
   }, []);

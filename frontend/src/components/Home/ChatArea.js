@@ -3,6 +3,8 @@ import React, { useState, useEffect } from 'react';
 import './ChatArea.css';
 import axios from 'axios';
 import Picker from 'emoji-picker-react';
+import { IoCheckmarkDone} from "react-icons/io5";
+import { IoMdAttach } from "react-icons/io";
 
 const ChatArea = ({ chat, userId, socket }) => {
   const [messages, setMessages] = useState([]);
@@ -14,19 +16,22 @@ const ChatArea = ({ chat, userId, socket }) => {
   const [selectedFile, setSelectedFile] = useState(null);
 
 
-  // console.log(chat._id);
-  // const socket = io('http://localhost:5000');
-
   useEffect(() => {
     const fetchMessages = async () => {
       try {
         const response = await axios.get(`/api/messages/${userId}/${chat.friendId ? chat.friendId._id : chat._id}`); // Fetch chat messages from the backend
         setMessages(response.data.messages);
         // console.log(response.data.messages);
-      } catch (error) {
+        await axios.post(`/api/messages/read`, {
+          userId,
+          senderId: chat.friendId ? chat.friendId._id : chat._id,
+        });
+      } 
+      catch (error) {
         console.error('Error fetching messages:', error);
       }
 
+      
       console.log(chat);
     };
 
@@ -145,13 +150,23 @@ const ChatArea = ({ chat, userId, socket }) => {
     setShowPopup(true); // Show the popup at the center
   };
 
+  const handleCopyMessage = () => {
+    navigator.clipboard.writeText(selectedMessage.content)
+      .then(() => {
+        alert('Message copied to clipboard!');
+      })
+      .catch((err) => {
+        console.error('Failed to copy text: ', err);
+      });
+      setShowPopup(false);
+  };
   const handleDeleteMessage = (type) => {
     console.log(type, "here");
     if (type === 'deleteForMe') {
       setMessages(messages.filter((_, index) => index._id !== selectedMessage._id));
     } 
     else if (type === 'deleteForEveryone') {
-      if(selectedMessage.sender._id === userId){   //included recently
+      if(selectedMessage.sender._id === userId){  
         const messageId = selectedMessage._id;
         console.log(messageId);
         const deleteMessage = async () => {
@@ -174,7 +189,7 @@ const ChatArea = ({ chat, userId, socket }) => {
     return <div className="chat-area">Select a chat to start messaging</div>;
   }
 
-  const handleEmojiClick = (event, emojiObject) => {
+  const handleEmojiClick = (emojiObject) => {
     // Append the selected emoji to the message input
     setNewMessage(prevMessage => prevMessage + emojiObject.emoji);
   };
@@ -202,18 +217,20 @@ const ChatArea = ({ chat, userId, socket }) => {
                   {/* <button className="close-button" onClick={onClose}>
                     &times; 
                   </button> */}
+              
                 </div>
                 <div className="profile-content">
                   <img
-                    src={chat.friendId ? chat.friendId.profilePicture : 'https://tse4.mm.bing.net/th?id=OIP.aIcKkrfqTSfQLSxj795W1wHaHa&pid=Api&P=0&h=180'}
-                    alt={chat.friendId ? chat.friendId.username : chat.username}
+                    src='https://tse4.mm.bing.net/th?id=OIP.aIcKkrfqTSfQLSxj795W1wHaHa&pid=Api&P=0&h=180'
+                    alt={chat.friendId ? chat.friendId.bio : chat.bio}
                     className="profile-pic"
                   />
-                  <p className="bio">{chat.friendId ? chat.friendId.bio : chat.bio}</p>
+                  <p>Hey there I am using LinkMate!</p>
                 </div>
               </div>
       )}
       </div>
+
       <div className="chat-messages">
         {messages.map((msg, index) => (
           <div
@@ -221,13 +238,15 @@ const ChatArea = ({ chat, userId, socket }) => {
             className={`message ${msg.sender && msg.sender._id === userId ? 'outgoing' : 'incoming'}`}
             onContextMenu={(e) => handleRightClick(e, msg)} 
           >
-          <label className="username">{msg.sender ? msg.sender.username : "undefined"}</label><br/>
+            <label className="username">{msg.sender ? msg.sender.username : "undefined"}</label><br/>
+            
             {msg.content}
-            <div className="timestamp">  {formatTimestamp(msg.timestamp)}</div>
+            <div className="timestamp">{formatTimestamp(msg.timestamp)}</div>
+            {msg.sender && msg.sender._id === userId && msg.isRead && (
+              <IoCheckmarkDone />
+            )}
           </div>
-        )
-
-        )}
+        ))}
       </div>
 
     {/* <div className="chat-messages">
@@ -259,7 +278,7 @@ const ChatArea = ({ chat, userId, socket }) => {
       )}
       <div className="chat-input">
       <span onClick={() => setShowEmojiPicker(!showEmojiPicker)}>
-        😊 {/* This button toggles the emoji picker */}
+      😀
       </span>
         <input
           type="text"
@@ -276,7 +295,7 @@ const ChatArea = ({ chat, userId, socket }) => {
           id="fileUpload"
         />
         <label htmlFor="fileUpload" style={{ cursor: 'pointer' }}>
-          <img src='https://cdn-icons-png.flaticon.com/512/54/54848.png' className="attach"></img>
+          <IoMdAttach size={35}/>
         </label>
         <button onClick={handleSendMessage}>Send</button>
       </div>
@@ -285,10 +304,10 @@ const ChatArea = ({ chat, userId, socket }) => {
       {showPopup && (
         <div className="popup">
           <div className="popup-content">
-            <div onClick={() => handleDeleteMessage('deleteForMe')}>Delete from Me</div>
+            <div onClick={() => handleCopyMessage()}>Copy</div>
             <hr className="thin-line" />
             <div onClick={() => handleDeleteMessage('deleteForEveryone')}>
-              Delete from Everyone
+              Delete for Everyone
             </div>
           </div>
         </div>

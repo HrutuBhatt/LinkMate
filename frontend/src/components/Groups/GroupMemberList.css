@@ -30,7 +30,7 @@
 }
 
 .group-members-list h3 {
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 500;
   margin-bottom: 10px;
   color: #444;
@@ -51,22 +51,23 @@
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  font-size: 6px;
 }
 
 .group-member-tile:hover {
-  background-color: #f1f1f1;
+  background-color: #f2eaff;
 }
 
 .group-member-tile.admin {
-  font-weight: 700;
-  color: #d9534f; /* Highlight for admin */
+  font-weight: 500;
+  color: #701dff; /* Highlight for admin */
 }
 
 .add-member-btn {
   display: block;
   margin-top: 10px;
   padding: 10px 15px;
-  background-color: #5cb85c;
+  background-color: #6b6dff;
   color: white;
   font-weight: bold;
   border: none;
@@ -76,7 +77,7 @@
 }
 
 .add-member-btn:hover {
-  background-color: #4cae4c;
+  background-color: #6c37ff;
 }
 
 /* Context Menu */
@@ -87,7 +88,7 @@
   border-radius: 4px;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
   padding: 10px;
-  z-index: 100;
+  z-index: 1000;
 }
 
 .context-menu-option {
@@ -140,7 +141,7 @@
 
 .usermodal h3 {
   margin-bottom: 20px;
-  font-size: 18px;
+  font-size: 14px;
   font-weight: 600;
 }
 
@@ -156,16 +157,17 @@
   padding: 10px;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  font-size: 14px;
 }
 
 .usermodal ul li:hover {
-  background-color: #f1f1f1;
+  background-color: #f6e8fe;
 }
 
 .usermodal button {
   margin-top: 15px;
   padding: 10px 15px;
-  background-color: #007bff;
+  background-color: #7471ff;
   color: white;
   border: none;
   border-radius: 5px;
@@ -194,7 +196,7 @@
 }
 
 .exit-group-btn button {
-  background-color: #ff4d4f; /* Red color to indicate danger (leaving the group) */
+  background-color: #b54dff; /* Red color to indicate danger (leaving the group) */
   color: white;
   border: none;
   padding: 10px 20px;
@@ -205,7 +207,8 @@
 }
 
 .exit-group-btn button:hover {
-  background-color: #d9363e; /* Darker red on hover */
+  background-color: #5f00dc; /* Darker red on hover */
+  color: white;
 }
 
 .exit-group-btn button:focus {
@@ -213,6 +216,6 @@
 }
 
 .exit-group-btn button:active {
-  background-color: #b72a2c; /* Even darker red on click */
+  background-color: #9e2eff; /* Even darker red on click */
 }
 

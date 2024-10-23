@@ -12,7 +12,11 @@ const userSchema = new Schema({
     recent: [{
         friendId: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
         timestamp: { type: Date, default: Date.now }
-    }]
+    }],
+    unreadMessages: [{ 
+        senderId: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }, 
+        count: { type: Number, default: 0 } 
+      }],
 });
 
 const User = mongoose.model('User',userSchema);

@@ -3,7 +3,9 @@ import './SignupPage.css';
 import axios from 'axios';
 import React, {useState, useCallback, useContext} from 'react';
 import { AuthContext } from '../../context/AuthContext';
-// import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+
+import { Link } from 'react-router-dom';
 const SignupPage = () => {
   const [formState, inputHandler] = useForm(
     {
@@ -16,7 +18,7 @@ const SignupPage = () => {
 
   const auth = useContext(AuthContext);  // Access AuthContext
   const [error, setError] = useState(null);
-
+  const navigate = useNavigate();
   const signupSubmitHandler = async (event) => {
     event.preventDefault();
     if (!formState.isValid) {
@@ -36,14 +38,19 @@ const SignupPage = () => {
 
       auth.login(token);  // Store the token in the AuthContext
       console.log('Signup successful:', response.data);
-      // Redirect to another page if necessary
+      navigate('/login');
     } catch (err) {
-      setError(err.response?.data?.message || 'Signup failed');
+      const errorMessage = err.response?.data?.message || 'Signup failed';
+      setError(errorMessage); // Update error state to show it in the UI
       console.log('Signup error:', err);
     }
   };
 
   return (
+    <div className='background'>
+    <div className="header">
+      <h1>💬 LinkMate</h1>
+    </div>
     <div className="auth-container">
       <h2><u>SignUp</u></h2>
       <form onSubmit={signupSubmitHandler}>
@@ -71,7 +78,13 @@ const SignupPage = () => {
         <br/><br/>
         <button type="submit" disabled={!formState.isValid}>Signup</button>
         {error && <p className="error-text">{error}</p>}
+
+        <p>Already have an account?</p>
+        <Link to="/login">
+          <span className="icon-name">Login</span>
+        </Link>
       </form>
+    </div>
     </div>
   );
 };

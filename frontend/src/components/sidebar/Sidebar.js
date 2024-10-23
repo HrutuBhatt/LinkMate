@@ -63,15 +63,15 @@ const Sidebar = ({ isExpanded, setIsExpanded }) => {
             <FaUserFriends className="icon" />
             {isExpanded && <span className="icon-name">Groups</span>}
           </Link>
+          <Link to="/requests" className="sidebar-item">
+            <FaSearch className="icon" />
+            {isExpanded && <span className="icon-name">Requests</span>}
+          </Link>
           {/* Logout functionality */}
           <div className="sidebar-item" onClick={handleLogout}>
             <FaSignOutAlt className="icon" />
             {isExpanded && <span className="icon-name">Logout</span>}
           </div>
-          <Link to="/requests" className="sidebar-item">
-            <FaSearch className="icon" />
-            {isExpanded && <span className="icon-name">Requests</span>}
-          </Link>
         </div>
   
         {/* Profile Button */}

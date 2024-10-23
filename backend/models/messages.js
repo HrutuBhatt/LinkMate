@@ -7,7 +7,7 @@ const messageSchema = new mongoose.Schema({
     content: { type: String, required: true },
     timestamp: { type: Date, default: Date.now },
     media: { type: String },     // URL to any media attached to the message,
-    unread: {type: Boolean, default: true}
+    isRead: { type: Boolean, default: false },
 });
   
 const Message = mongoose.model('Message', messageSchema);
