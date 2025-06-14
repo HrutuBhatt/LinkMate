@@ -32,6 +32,18 @@ LinkMate is a full-stack messaging web application built with the MERN stack (Mo
 - Multer (for file uploads)
 
 ---
+## 🖼️ Images
+![Screenshot_20250615_001737](https://github.com/user-attachments/assets/215f315c-f3be-46ee-9bd1-66902f3d9e0f)
+
+![Screenshot_20250615_002213](https://github.com/user-attachments/assets/2da047ac-e23e-4018-92b5-02521c28bfa6)
+
+![Screenshot_20250615_001845](https://github.com/user-attachments/assets/85c1777e-a60c-4893-8840-6d30e0b0348c)
+
+![Screenshot_20250615_001938](https://github.com/user-attachments/assets/dda167b9-b4d0-4e35-9a1a-8cb7e0463095)
+
+![Screenshot_20250615_002016](https://github.com/user-attachments/assets/d0b32c79-fa70-4f03-a646-86971c0bbea1)
+
+![Screenshot_20250615_002149](https://github.com/user-attachments/assets/6f193dd9-1d8a-4dac-a56b-c683a85dd738)
 
 ## 📁 Project Structure
 ```bash
@@ -87,7 +99,7 @@ npm start
 ```
 - App will start on http://localhost:3000
 
-## Future Enhancements
+## 🎯 Future Enhancements
 - File sharing
 - Video calling
 - Notifications
